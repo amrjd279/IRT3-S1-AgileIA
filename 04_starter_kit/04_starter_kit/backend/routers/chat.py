@@ -54,7 +54,7 @@ class Sentiment(BaseModel):
     langue_detectee: str | None = Field(
         default=None,
         description="Langue du texte analyse, en francais",
-    )
+    ):
 
 
 @router.post("/sentiment", response_model=Sentiment)
