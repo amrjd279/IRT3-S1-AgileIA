@@ -1,8 +1,7 @@
 # IRT3-S1-AgileIA
 
 ## À vous de jouer : Lisez le vrai code qui a tourné
---- 
-"Exercice   10 min
+
 Objectif : ouvrir le fichier qui a réellement exécuté votre appel, pas seulement l'exemple simplifié du cours.
 
 * Ouvrez backend/services/gemini_service.py dans votre éditeur : c'est ce fichier, pas la théorie du matin, qui a réellement appelé Gemini quand vous avez cliqué Execute.
@@ -16,3 +15,23 @@ Objectif : ouvrir le fichier qui a réellement exécuté votre appel, pas seulem
 ### Si l’appel à Gemini échoue dans ``generer_texte``, cette fonction ne capture pas l’erreur : l’exception remonte directement.
 
 POURQUOI CETTE ÉTAPE : le code des slides est volontairement simplifié pour l'explication. Le vrai fichier gère aussi les erreurs et la configuration par défaut : savoir le retrouver et le lire vous servira tout le semestre, bien au-delà de cette démo."
+
+---
+
+## À vous de jouer : Écrivez votre propre script
+
+Objectif : reprendre en main le code que vous venez de lire, en écrivant vous-même sa version la plus nue, sans FastAPI ni Swagger autour.
+
+1.	Créez un nouveau fichier scripts/appel_direct.py (créez le dossier scripts/ s'il n'existe pas encore).
+# scripts/appel_direct.py 
+```python
+from google import genai
+from backend.config import settings
+ 
+client = genai.Client(api_key=settings.gemini_api_key)
+response = client.models.generate_content(
+    model=settings.default_model,
+    contents="Explique le RGPD en 3 phrases.",
+)
+print(response.text)
+```
