@@ -48,7 +48,7 @@ class Polarite(str, Enum):
 
 
 class Sentiment(BaseModel):
-    polarite: str
+    polarite: Polarite
     score_confiance: float = Field(ge=0, le=1)
     justification: str
     langue_detectee: str | None = Field(
