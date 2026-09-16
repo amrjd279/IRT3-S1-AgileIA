@@ -46,6 +46,7 @@ print(response.text)
 * lecture de ``response.text`` -> ``response = _client.models.generate_content(model=model, contents=prompt, config=config)``
 
 ## Étape 5 : Sortie structurée avec Pydantic
+
 Objectif : extraire des entités d'un texte en JSON garanti conforme. La compétence la plus importante du cours.
 1.	Dépliez POST /chat/sentiment dans Swagger UI, cliquez sur "Try it out".
 ```python 
@@ -87,3 +88,20 @@ Réponse attendue :
 }
 ```
 La sortie est contrainte par Pydantic : polarité limitée à trois valeurs, score entre 0 et 1, justification obligatoire. Vérification effectuée : 6 tests passent et la route apparaît bien dans OpenAPI.
+
+2. Testez avec un texte, par exemple :
+```python 
+{
+  "question": "Le service etait correct, sans plus."
+}
+```
+* Le schéma réellement utilisé, dans backend/routers/chat.py :
+```python 
+class Polarite(str, Enum):
+    positif = "positif"; negatif = "negatif"; neutre = "neutre"
+ 
+class Sentiment(BaseModel):
+    polarite: Polarite
+    score_confiance: float = Field(ge=0, le=1)
+    justification: str
+```
