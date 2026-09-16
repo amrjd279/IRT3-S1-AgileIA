@@ -146,7 +146,7 @@ Après chaque modification suivie de ``Ctrl+S``, Uvicorn redémarre automatiquem
     )
 ```
 
-3. Relancez /chat/sentiment avec un texte dans une autre langue, vérifiez que le nouveau champ apparaît, rempli par le modèle
+3. Relancez ``/chat/sentiment`` avec un texte dans une autre langue, vérifiez que le nouveau champ apparaît, rempli par le modèle
 
 Test effectué avec un texte en anglais :
 ```python
@@ -163,3 +163,18 @@ Réponse obtenue :
   "langue_detectee": "anglais"
 }
 ```
+## À vous de jouer : Cassez l'Enum et observez
+Objectif : voir de vos propres yeux ce que l'Enum vous empêchait de voir.
+1.	Remplacez temporairement “polarite: Polarite” par “polarite: str” dans la classe Sentiment.
+#### Expérience réalisée puis annulée proprement.
+* Avec temporairement : polarite: str
+* Pydantic acceptait une valeur invalide :
+```python 
+{
+  "polarite": "mitige",
+  "score_confiance": 0.62,
+  "justification": "Le texte est partagé."
+}
+```
+* Swagger décrivait alors ``polarite`` comme une simple chaîne, sans restriction. L``Enum`` a ensuite été restauré : ``polarite: Polarite``
+* Vérification : la valeur ``"mitige"`` est de nouveau rejetée par Pydantic.
