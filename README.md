@@ -126,7 +126,7 @@ La réponse respecte bien le schéma Pydantic : polarité valide, score compris 
 
 Objectif : ajouter vous même un champ à un schéma Pydantic et en observer l'effet immédiat.
 
-* 1.	Dans chat.py, ajoutez un champ à la classe Sentiment :
+1.	Dans chat.py, ajoutez un champ à la classe Sentiment :
 ```python
 langue_detectee: str | None = Field(
     default=None,
@@ -134,3 +134,5 @@ langue_detectee: str | None = Field(
 )
 ```
 Swagger affiche maintenant ce champ comme optionnel. Les anciennes réponses restent compatibles avec ``langue_detectee: null``.
+
+2. Sauvegardez : le serveur redémarre tout seul grâce à --reload. -> ``CTRL + S``
