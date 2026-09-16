@@ -185,3 +185,20 @@ class Sentiment(BaseModel):
     polarite: str
 ```
 Vérification réussie : une valeur comme ```"mitige"``` est maintenant acceptée.
+
+2.	Relancez /chat/sentiment avec une phrase volontairement ambiguë, par exemple « Bof, sans plus, mais pas horrible non plus ».
+```python
+* La relance a finalement réussi avec :
+{
+  "question": "Bof, sans plus, mais pas horrible non plus"
+}
+```
+Réponse HTTP ``200`` :
+```python
+{
+  "polarite": "neutre",
+  "score_confiance": 0.85,
+  "justification": "Le texte exprime une opinion très mitigée et moyenne, sans enthousiasme ni rejet critique.",
+  "langue_detectee": "français"
+}
+```
