@@ -105,3 +105,19 @@ class Sentiment(BaseModel):
     score_confiance: float = Field(ge=0, le=1)
     justification: str
 ```
+* Test effectué avec : 
+```python
+{
+  "question": "Le service etait correct, sans plus."
+}
+}
+```
+* Résultat HTTP 200 :
+```python
+{
+  "polarite": "neutre",
+  "score_confiance": 0.9,
+  "justification": "L'expression 'correct, sans plus' indique un sentiment neutre."
+}
+```
+La réponse respecte bien le schéma Pydantic : polarité valide, score compris entre 0 et 1, justification présente.
