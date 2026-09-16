@@ -51,6 +51,10 @@ class Sentiment(BaseModel):
     polarite: Polarite
     score_confiance: float = Field(ge=0, le=1)
     justification: str
+    langue_detectee: str | None = Field(
+        default=None,
+        description="Langue du texte analyse, en francais",
+    )
 
 
 @router.post("/sentiment", response_model=Sentiment)
