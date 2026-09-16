@@ -44,3 +44,46 @@ print(response.text)
 * utilisation de ``settings.default_model`` -> ``default_model: str = "gemini-3.6-flash"``
 * appel à ``client.models.generate_content(...)``
 * lecture de ``response.text`` -> ``response = _client.models.generate_content(model=model, contents=prompt, config=config)``
+
+## Étape 5 : Sortie structurée avec Pydantic
+Objectif : extraire des entités d'un texte en JSON garanti conforme. La compétence la plus importante du cours.
+1.	Dépliez POST /chat/sentiment dans Swagger UI, cliquez sur "Try it out".
+```python 
+class Sentiment(BaseModel):
+    polarite: Polarite
+    score_confiance: float = Field(ge=0, le=1)
+    justification: str
+
+
+@router.post("/sentiment", response_model=Sentiment)
+async def analyser_sentiment(req: QuestionRequest, db: Session = Depends(get_db)):
+    """Démo de sortie structurée Pydantic : analyse de sentiment d'un texte."""
+    try:
+        return gemini_service.generer_structure(
+            f"Analyse le sentiment du texte suivant : {req.question}",
+            schema=Sentiment,
+            db=db,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur IA : {e}") from e
+```
+#### Dans Swagger : 
+1. Ouvre ``http://127.0.0.1:8000/docs``
+2. Déplie ``POST /chat/sentiment``
+3. Clique sur **Try it out**.
+4. Utilise :
+```python
+{
+  "question": "Le service est excellent et très rapide."
+}
+```
+5. Clique sur **Execute**.
+Réponse attendue :
+```python
+{
+  "polarite": "positif",
+  "score_confiance": 0.98,
+  "justification": "Le texte exprime une satisfaction."
+}
+```
+La sortie est contrainte par Pydantic : polarité limitée à trois valeurs, score entre 0 et 1, justification obligatoire. Vérification effectuée : 6 tests passent et la route apparaît bien dans OpenAPI.
