@@ -1,0 +1,47 @@
+# Secrets : JAMAIS dans Git
+.env
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Tests et couverture
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Base de données locale
+*.db
+*.sqlite3
+
+# Uploads utilisateurs
+uploads/
+static/uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Frontend (si présent)
+node_modules/
+.next/
+.nuxt/
+dist/
