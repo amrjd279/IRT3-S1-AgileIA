@@ -128,12 +128,9 @@ Objectif : ajouter vous même un champ à un schéma Pydantic et en observer l'e
 
 * 1.	Dans chat.py, ajoutez un champ à la classe Sentiment :
 ```python
-class Sentiment(BaseModel):
-    polarite: Polarite
-    score_confiance: float = Field(ge=0, le=1)
-    justification: str
-    langue_detectee: str | None = Field(
-        default=None,
-        description="Langue du texte analyse, en francais",
-    )
+langue_detectee: str | None = Field(
+    default=None,
+    description="Langue du texte analyse, en francais",
+)
 ```
+Swagger affiche maintenant ce champ comme optionnel. Les anciennes réponses restent compatibles avec ``langue_detectee: null``.
