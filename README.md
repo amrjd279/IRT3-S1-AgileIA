@@ -35,3 +35,5 @@ response = client.models.generate_content(
 )
 print(response.text)
 ```
+
+2. Lancez-le avec python scripts/appel_direct.py, sans uvicorn ni navigateur : c'est un script Python ordinaire, pas un endpoint.
