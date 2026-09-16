@@ -202,3 +202,12 @@ Réponse HTTP ``200`` :
   "langue_detectee": "français"
 }
 ```
+La phrase ambiguë est donc classée ``neutre``. Un premier appel avait renvoyé temporairement ``500``, puis le serveur a répondu correctement.
+```python 
+class Polarite(str, Enum):
+    """Enum plutot que str : Gemini ne peut choisir qu'une valeur connue."""
+
+    positif = "positif"
+    negatif = "negatif"
+    neutre = "neutre"
+```
