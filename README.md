@@ -165,7 +165,6 @@ Réponse obtenue :
 ```
 ## À vous de jouer : Cassez l'Enum et observez
 Objectif : voir de vos propres yeux ce que l'Enum vous empêchait de voir.
-1.	Remplacez temporairement “polarite: Polarite” par “polarite: str” dans la classe Sentiment.
 #### Expérience réalisée puis annulée proprement.
 * Avec temporairement : polarite: str
 * Pydantic acceptait une valeur invalide :
@@ -178,3 +177,11 @@ Objectif : voir de vos propres yeux ce que l'Enum vous empêchait de voir.
 ```
 * Swagger décrivait alors ``polarite`` comme une simple chaîne, sans restriction. L``Enum`` a ensuite été restauré : ``polarite: Polarite``
 * Vérification : la valeur ``"mitige"`` est de nouveau rejetée par Pydantic.
+
+1. Remplacez temporairement “polarite: Polarite” par “polarite: str” dans la classe Sentiment.
+* Modification effectuée dans ``chat.py`` (Ligne 51-55) : 
+```python
+class Sentiment(BaseModel):
+    polarite: str
+```
+Vérification réussie : une valeur comme ```"mitige"``` est maintenant acceptée.
