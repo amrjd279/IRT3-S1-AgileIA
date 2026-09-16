@@ -121,3 +121,19 @@ class Sentiment(BaseModel):
 }
 ```
 La réponse respecte bien le schéma Pydantic : polarité valide, score compris entre 0 et 1, justification présente.
+
+## À vous de jouer : Étendez le schéma vous même
+
+Objectif : ajouter vous même un champ à un schéma Pydantic et en observer l'effet immédiat.
+
+* 1.	Dans chat.py, ajoutez un champ à la classe Sentiment :
+```python
+class Sentiment(BaseModel):
+    polarite: Polarite
+    score_confiance: float = Field(ge=0, le=1)
+    justification: str
+    langue_detectee: str | None = Field(
+        default=None,
+        description="Langue du texte analyse, en francais",
+    )
+```
