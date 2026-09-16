@@ -136,3 +136,30 @@ langue_detectee: str | None = Field(
 Swagger affiche maintenant ce champ comme optionnel. Les anciennes réponses restent compatibles avec ``langue_detectee: null``.
 
 2. Sauvegardez : le serveur redémarre tout seul grâce à --reload. -> ``CTRL + S``
+
+Le fichier est sauvegardé et le serveur tourne bien avec ```--reload```.
+Après chaque modification suivie de ``Ctrl+S``, Uvicorn redémarre automatiquement. Vérification effectuée : ``/openapi.json`` répond ``HTTP 200`` et contient bien ``langue_detectee``.
+```python 
+  langue_detectee: str | None = Field(
+        default=None,
+        description="Langue du texte analyse, en francais",
+    )
+```
+
+3. Relancez /chat/sentiment avec un texte dans une autre langue, vérifiez que le nouveau champ apparaît, rempli par le modèle
+
+Test effectué avec un texte en anglais :
+```python
+{
+  "question": "The service was correct, nothing more."
+}
+```
+Réponse obtenue :
+```python
+{
+  "polarite": "neutre",
+  "score_confiance": 0.85,
+  "justification": "L'expression indique une tonalité neutre.",
+  "langue_detectee": "anglais"
+}
+```
