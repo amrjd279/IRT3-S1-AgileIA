@@ -37,3 +37,10 @@ print(response.text)
 ```
 
 2. Lancez-le avec python scripts/appel_direct.py, sans uvicorn ni navigateur : c'est un script Python ordinaire, pas un endpoint.
+#### Le script a été exécuté directement avec succès, sans Uvicorn ni navigateur. Gemini a répondu avec une explication du RGPD en trois phrases.
+
+3. Comparez avec backend/services/gemini_service.py, ouvert à l'exercice précédent : c'est la même logique, juste sans la couche FastAPI autour.
+* création du client Gemini avec ``settings.gemini_api_key`` -> gemini_api_key: str
+* utilisation de ``settings.default_model`` -> default_model: str = "gemini-3.6-flash" 
+* appel à ``client.models.generate_content(...)``
+* lecture de ``response.text`` -> response = _client.models.generate_content(model=model, contents=prompt, config=config)
