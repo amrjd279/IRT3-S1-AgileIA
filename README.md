@@ -297,3 +297,11 @@ async def analyser_fichier(
             status_code=400,
             detail=f"Type de fichier non supporté : {fichier.content_type}",
 ```
+2. Notez le code d'erreur obtenu (400) et le message.
+* Code d’erreur obtenu : **400 Bad Request**
+* Message :
+```python 
+{
+  "detail": "Type de fichier non supporté : text/plain"
+}
+```
