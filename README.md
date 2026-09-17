@@ -250,3 +250,11 @@ Les champs ``fichier`` et ``prompt`` deviennent alors modifiables.
 ``fichier: UploadFile = File(...)``
 #### Prompt :
 ``prompt: str = Form(default="Décris le contenu de ce fichier.")``
+
+3. Cliquez sur "Choose File" et sélectionnez votre fichier. Laissez le prompt par défaut ou personnalisez-le.
+
+### Dans Swagger :
+1. Cliquez sur **Choose File**.
+2. Sélectionnez une image ou un PDF de démonstration.
+3. Conservez le prompt par défaut -> Décris le contenu de ce fichier.
+Vous pouvez aussi le personnaliser, par exemple : "extrait les informations importantes visibles dans ce document."
