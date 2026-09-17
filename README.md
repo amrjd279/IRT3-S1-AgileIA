@@ -305,3 +305,22 @@ async def analyser_fichier(
   "detail": "Type de fichier non supporté : text/plain"
 }
 ```
+3. Ouvrez backend/routers/files.py et trouvez la ligne MIMES_AUTORISES qui explique pourquoi :
+```python
+MIMES_AUTORISES = {
+    "application/pdf",
+    "image/jpeg", "image/png", "image/webp",
+    "audio/mpeg", "audio/wav",
+}
+```
+* Dans ``files.py``(ligne 12-19), l'ensemble ``MIMES_AUTORISES`` définit les types de fichiers acceptés :
+```python
+MIMES_AUTORISES = {
+    "application/pdf",
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "audio/mpeg",
+    "audio/wav",
+}
+```
