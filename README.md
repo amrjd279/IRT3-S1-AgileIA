@@ -211,3 +211,8 @@ class Polarite(str, Enum):
     negatif = "negatif"
     neutre = "neutre"
 ```
+
+3.	Regardez la valeur de polarite obtenue, puis remettez polarite: Polarite avant de continuer.
+* La polarité obtenue était ``"neutre"``, donc aucune quatrième catégorie n’est apparue lors de cet essai.La polarité obtenue était neutre, donc aucune quatrième catégorie n’est apparue lors de cet essai. --> ``neutre = "neutre"``
+* J’ai restauré : polarite: Polarite
+* Vérification effectuée : une valeur valide comme ``"neutre"`` est acceptée, tandis qu’une valeur inconnue comme ``"mitige"`` est rejetée par Pydantic.
