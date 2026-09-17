@@ -262,3 +262,38 @@ Vous pouvez aussi le personnaliser, par exemple : "extrait les informations impo
 4. Cliquez sur "Execute".
 * Cliquez sur Execute dans Swagger pour envoyer l’image ou le PDF à ``POST /files/analyser``.
 * Le serveur transmettra le fichier à Gemini avec le prompt choisi et affichera ensuite la réponse d’analyse.
+
+## À vous de jouer : Testez une limite
+Objectif : déclencher volontairement une erreur contrôlée et aller lire le code qui la génère
+1.	Dans /files/analyser, uploadez un fichier .docx ou .txt au lieu d'une image ou d'un PDF.
+* Test effectué avec un fichier ``test.txt``.
+* Résultat :
+```python 
+{
+  "detail": "Type de fichier non supporté : text/plain"
+}
+```
+* Statut HTTP : ``400 Bad Request``
+* L’erreur est générée dans ``files.py (ligne 13-33)``, où seuls les types PDF, PNG, JPEG, WebP et audio sont autorisés.
+```python
+    "application/pdf",
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "audio/mpeg",
+    "audio/wav",
+}
+
+
+@router.post("/analyser", response_model=AnalyseFichierResponse)
+async def analyser_fichier(
+    fichier: UploadFile = File(...),
+    prompt: str = Form(default="Décris le contenu de ce fichier."),
+    db: Session = Depends(get_db),
+):
+    """Analyse multimodale d'un fichier uploadé."""
+    if fichier.content_type not in MIMES_AUTORISES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Type de fichier non supporté : {fichier.content_type}",
+```
