@@ -235,3 +235,18 @@ Objectif : montrer que la même API prend en entrée bien plus que du texte.
 6. Clique sur **Execute**.
 
 La route a été vérifiée dans OpenAI et les **6 tests passent**
+
+2. Dépliez POST /files/analyser, cliquez sur "Try it out".
+
+### Dans Swagger :
+1. Ouvrez ``http://127.0.0.1:8000/docs``.
+2. Repérez ``POST /files/analyser``
+3. Cliquez sur la ligne pour la déplier.
+4. Cliquez sur **Try it out.**
+
+Les champs ``fichier`` et ``prompt`` deviennent alors modifiables.
+
+#### Fichier :
+``fichier: UploadFile = File(...)``
+#### Prompt :
+``prompt: str = Form(default="Décris le contenu de ce fichier.")``
