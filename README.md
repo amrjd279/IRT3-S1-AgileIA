@@ -324,3 +324,20 @@ MIMES_AUTORISES = {
     "audio/wav",
 }
 ```
+Le fichier ``.txt`` a le type MIME ``text/plain``, qui n’est pas présent dans cet ensemble. C’est pourquoi l’API renvoie une erreur ``400``.
+
+## Étape 7 : Streaming, afficher la réponse progressivement
+Objectif : montrer l'expérience « machine à écrire » des assistants IA grand public.
+
+Swagger UI n'affiche pas l'effet progressif : il attend la fin puis montre tout le texte d'un coup. Pour voir le vrai effet, testez en ligne de commande :
+
+```python
+curl.exe -N -X POST http://127.0.0.1:8000/chat/stream -H "Content-Type: application/json" -d "{\"question\": \"Raconte une courte histoire.\"}"
+```
+* Le streaming fonctionne avec ``curl.exe -N``.
+
+La réponse est arrivée progressivement dans le terminal, au lieu d’être affichée d’un seul bloc. L’endpoint testé est :
+```python
+POST http://127.0.0.1:8000/chat/stream`
+```
+PowerShell nécessitait un fichier JSON temporaire pour conserver correctement les guillemets de la requête.
