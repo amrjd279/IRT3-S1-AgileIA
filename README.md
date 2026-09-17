@@ -216,3 +216,22 @@ class Polarite(str, Enum):
 * La polarité obtenue était ``"neutre"``, donc aucune quatrième catégorie n’est apparue lors de cet essai.La polarité obtenue était neutre, donc aucune quatrième catégorie n’est apparue lors de cet essai. --> ``neutre = "neutre"``
 * J’ai restauré : polarite: Polarite
 * Vérification effectuée : une valeur valide comme ``"neutre"`` est acceptée, tandis qu’une valeur inconnue comme ``"mitige"`` est rejetée par Pydantic.
+
+## Étape 6 : Multimodalité : analyser une image ou un PDF
+Objectif : montrer que la même API prend en entrée bien plus que du texte.
+
+1. Une image ou un petit PDF de démo vous est distribué (ticket de caisse scanné, capture d'écran d'UI).
+
+### L'endpoint multimodal est opérationnal :
+* ``POST /files/analyser``
+* Fichier accepté : PNG, JPEG, WebP ou PDF
+* Prompt optionnel : ``Décris le contenu de ce fichier.``
+### Dans Swagger :
+1. Ouvre ``http://127.0.0.1:8000/docs``
+2. Dépile : ``POST /files/analyser``
+3.Clique sur **Try it out**
+4. Sélectionne une image ou un PDF **sans données sensibles**
+5. Ajoute un prompt, par exemple : ``Décris précisément le contenu visible dans cette image``
+6. Clique sur **Execute**.
+
+La route a été vérifiée dans OpenAI et les **6 tests passent**
