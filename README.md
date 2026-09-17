@@ -258,3 +258,7 @@ Les champs ``fichier`` et ``prompt`` deviennent alors modifiables.
 2. Sélectionnez une image ou un PDF de démonstration.
 3. Conservez le prompt par défaut -> Décris le contenu de ce fichier.
 Vous pouvez aussi le personnaliser, par exemple : "extrait les informations importantes visibles dans ce document."
+
+4. Cliquez sur "Execute".
+* Cliquez sur Execute dans Swagger pour envoyer l’image ou le PDF à ``POST /files/analyser``.
+* Le serveur transmettra le fichier à Gemini avec le prompt choisi et affichera ensuite la réponse d’analyse.
